@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function ButtonComponent({label,onClick}){
+            return <button onClick={onClick}>
+                 {label}
+                </button>
+        }
+
+
+        function Login(){
+            alert("Login btn clicked");
+        }
+        function Logout(){
+            alert("Logout btn clicked");
+        }
+
+        function Auth(){
+            return (
+                <>
+                <ButtonComponent label="Login" onClick={Login}/>
+                <ButtonComponent label="Logout" onClick={Logout}/>
+                </>
+            )
+        }
+
+    //    function UserInfo({name,age,city}){
+    //     return (
+    //         <div>
+    //         <h4>UserName :  {name}</h4>
+    //         <h4>Age : {age}</h4>
+    //         <h4>City : {city}</h4>    
+    //         </div>
+    //     )
+    //    }
+        // function App(){
+        //     return ( <>
+        //    <UserInfo name="Tommy Pandey" age={20} city="Pune"/>
+
+        //               <UserInfo name="Samay Pandey" age={23} city="Punjab"/>
+        //    <UserInfo name="Nama Pandey" age={22} city="Pinjal"/>
+
+        //     </>
+        // )
+            
+        // } 
+    
+    let root=ReactDOM.createRoot(document.getElementById("root"));
+        root.render(<Auth/>)
+    </script>
+    
+</body>
+</html>

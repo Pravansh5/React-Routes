@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>React Fetch Example</title>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+     function RenderData() {
+      const [data, setData] = useState([]);
+       async function fetchData() {
+        try{
+            let data= await axios.get("https://fakestoreapi.com/products");
+            setData(data.data);
+        }
+        catch(error){
+            console.error("Error fetching data:", error);
+        }
+      }
+      return (
+        <>
+          <button onClick={fetchData}>Get Data</button>
+          {data.map((ele, ind) => (
+            <div key={ind}>
+              <h3>{ele.title}</h3>
+            </div>
+          ))}
+        </>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<RenderData />);
+  </script>
+</body>
+</html>

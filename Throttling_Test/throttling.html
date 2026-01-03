@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>React CDN</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+
+    <!-- React DOM -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <!-- Babel (for JSX) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Your React code -->
+    <script type="text/babel">
+        const {useRef} = React;
+
+        function useThrottle(fn,delay){
+            const flag=useRef(true);
+            return (...args)=>{
+                if(!flag.current) return;
+                fn(...args);
+                flag.current=false;
+                setTimeout(()=>{
+                    flag.current=true;
+                },delay)
+            }
+        }
+        function App() {
+          const throttledClick=useThrottle(()=>{
+              console.log("clicked!");
+          },4000);
+        return <button onClick={throttledClick}>Click fast</button>
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
